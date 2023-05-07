@@ -1,0 +1,33 @@
+{
+    "name": "flare",
+    "children": [
+        {
+            "name": "flex",
+            "children": [
+                {
+                    "name": "FlareVis",
+                    "size": 560
+                }
+            ]
+        },
+        {
+            "name": "flex2",
+            "children": [
+                {
+                    "name": "FlareVis2",
+                    "size": 1560
+                }
+            ]
+        },
+        {
+            "name": "flex3",
+            "children": [
+                {
+                    "color": "red",
+                    "name": "FlareVis3",
+                    "size": 2560
+                }
+            ]
+        }
+    ]
+}
