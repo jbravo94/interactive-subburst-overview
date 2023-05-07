@@ -1,25 +1,44 @@
+<html>
+
 <head>
-    <script src="//unpkg.com/d3"></script>
-  
-    <script src="//unpkg.com/sunburst-chart"></script>
-    <!--<script src="../../dist/sunburst-chart.js"></script>-->
-  
-    <style>body { margin: 0 }</style>
-  </head>
-  <body>
+    <script src="//unpkg.com/d3@7.8.4"></script>
+    <script src="//unpkg.com/sunburst-chart@1.19.0"></script>
+
+    <style>
+        body {
+            margin: 0
+        }
+    </style>
+</head>
+
+<body>
     <div id="chart"></div>
-  
+
     <script>
-      const color = d3.scaleOrdinal(d3.schemePaired);
-  
-      fetch('flare.json').then(res => res.json()).then(data => {
-        Sunburst()
-          .data(data)
-          .label('name')
-          .size('size')
-          .color((d, parent) => d.color ? d.color : color(parent ? parent.data.name : null))
-          .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
-          (document.getElementById('chart'));
-      });
+
+        const color = d3.scaleOrdinal(d3.schemePaired);
+
+        const load = (data) => {
+            Sunburst()
+                .data(data)
+                .label('name')
+                .size('size')
+                .color((d, parent) => d.color ? d.color : color(parent ? parent.data.name : null))
+                .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
+                (document.getElementById('chart'));
+        };
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const data = urlParams.get('data');
+
+        if (data) {
+            load(JSON.parse(data));
+        } else {
+            fetch('flare.json').then(res => res.json()).then(load);
+        }
+
     </script>
-  </body>
+</body>
+
+</html>
