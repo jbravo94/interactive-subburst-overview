@@ -35,7 +35,7 @@
         if (data) {
             load(JSON.parse(data));
         } else {
-            fetch('flare.json').then(res => res.json()).then(load);
+            fetch('data.json').then(res => res.json()).then(load);
         }
 
     </script>
