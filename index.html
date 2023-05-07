@@ -25,6 +25,7 @@
                 .size('size')
                 .color((d, parent) => d.color ? d.color : color(parent ? parent.data.name : null))
                 .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
+                .handleNonFittingLabel((label, availablePx, node) => "...")
                 (document.getElementById('chart'));
         };
 
