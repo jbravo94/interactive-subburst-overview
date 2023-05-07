@@ -13,3 +13,4 @@ http://localhost:8000/?data={"name":"flare","children":[{"name":"flex","children
 * https://gist.github.com/mbostock/4348373
 * https://gist.github.com/vasturiano/12da9071095fbd4df434e60d52d2d58d
 * https://github.com/vasturiano/sunburst-chart
+* https://github.com/vasturiano/sunburst-chart/blob/master/example/truncate-labels/index.html

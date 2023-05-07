@@ -25,7 +25,12 @@
                 .size('size')
                 .color((d, parent) => d.color ? d.color : color(parent ? parent.data.name : null))
                 .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
-                .handleNonFittingLabel((label, availablePx, node) => "...")
+                .handleNonFittingLabel((label, availablePx) => {
+                    const numFitChars = Math.round(availablePx / 7); // ~7px per char
+                    return numFitChars < 5
+                        ? null
+                        : `${label.slice(0, Math.round(numFitChars) - 3)}...`;
+                })
                 (document.getElementById('chart'));
         };
 
