@@ -1,23 +1,29 @@
-{
-    "name": "data",
-    "children": [
+[
         {
             "name": "flex",
             "children": [
                 {
                     "name": "FlareVis",
-                    "value": 560
+                    "children": [
+                        {
+                            "name": "child",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
         {
             "name": "flex2",
-            "value": 2560,
             "children": [
                 {
-                    "color": "red",
                     "name": "FlareVis2",
-                    "value": 1560
+                    "children": [
+                        {
+                            "name": "child",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
@@ -26,17 +32,32 @@
             "children": [
                 {
                     "name": "FlareVis3a",
-                    "value": 1000
+                    "children": [
+                        {
+                            "name": "child",
+                            "value": 1
+                        }
+                    ]
                 },
                 {
                     "name": "FlareVis3b",
-                    "value": 560
+                    "children": [
+                        {
+                            "name": "child",
+                            "value": 1
+                        }
+                    ]
                 }
             ]
         },
         {
             "name": "flex3",
-            "value": 1000
+            "children": [
+                {
+                    "name": "child",
+                    "value": 1
+                }
+            ]
         }
     ]
-}
+

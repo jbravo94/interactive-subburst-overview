@@ -7,6 +7,10 @@
         body {
             margin: 0
         }
+        #chart {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -14,25 +18,11 @@
     <div id="chart"></div>
 
     <script>
-
-        
+        const chartDom = document.getElementById('chart');
+        const myChart = echarts.init(chartDom);
 
         const load = (data) => {
-            const chartDom = document.getElementById('chart');
-        const myChart = echarts.init(chartDom);
             const option = {
-                title: {
-                    text: 'WORLD COFFEE RESEARCH SENSORY LEXICON',
-                    subtext: 'Source: https://worldcoffeeresearch.org/work/sensory-lexicon/',
-                    textStyle: {
-                        fontSize: 14,
-                        align: 'center'
-                    },
-                    subtextStyle: {
-                        align: 'center'
-                    },
-                    sublink: 'https://worldcoffeeresearch.org/work/sensory-lexicon/'
-                },
                 series: {
                     type: 'sunburst',
                     data: data,
@@ -86,7 +76,7 @@
         if (data) {
             load(JSON.parse(data));
         } else {
-            fetch('example-echarts.json').then(res => res.json()).then(load);
+            fetch('data-echarts.json').then(res => res.json()).then(load);
         }
 
     </script>
