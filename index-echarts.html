@@ -23,13 +23,26 @@
 
         const load = (data) => {
             const option = {
+                tooltip: {
+                        formatter: (params) => {
+                            const path = params.treePathInfo;
+                            const value = params.value;
+
+                            path.shift();
+
+                            return `${path.map(node => node.name).join(" > ")} (${value})`;
+                        }
+                    },
+                    aria: {
+                        show: true
+                    },
                 series: {
                     type: 'sunburst',
                     data: data,
                     radius: [0, '95%'],
                     sort: undefined,
                     emphasis: {
-                        focus: 'ancestor'
+                        focus: 'descendant'
                     },
                     levels: [
                         {},
