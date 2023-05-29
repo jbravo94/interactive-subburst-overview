@@ -100,6 +100,59 @@
         myChart.on('click', 'series', function (params) {
             if(params.treePathInfo.length === 1) {
                 myChart.setOption(option)
+            } else {
+                myChart.setOption(
+                    {
+                    series: {
+                        levels: [
+                        {},
+                        {
+                            r0: '20%',
+                            r: '35%',
+                            itemStyle: {
+                                borderWidth: 2
+                            },
+                            label: {
+                                align: 'center',
+                                marginTop: 15,
+                                rotate: 'tangential'
+                            }
+                        },
+                        {
+                            r0: '35%',
+                            r: '60%',
+                            label: {
+                                align: 'center',
+                                padding: 3,
+                                rotate: 'tangential'
+                            }
+                        },
+                        {
+                            r0: '60%',
+                            r: '100%',
+                            label: {
+                                align: 'center',
+                                padding: 3,
+                                rotate: 'tangential'
+                            }
+                        }
+                    ]
+                    }
+                });
+                
+                myChart.dispatchAction({
+                    type: 'sunburstRootToNode',
+                    targetNode: params.name
+                });
+
+                /*
+                const model = myChart.getModel();
+                const currentSeries = model.getSeriesByIndex(0);
+                const currentNode = currentSeries.getViewRoot();
+                currentSeries.resetViewRoot();
+                currentSeries.resetViewRoot(currentNode);
+                */
+
             }
         });
 
