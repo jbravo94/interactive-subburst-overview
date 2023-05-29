@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+
+    <style>
+        body {
+            margin: 0
+        }
+        #chart {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart"></div>
+
+    <script>
+        const chartDom = document.getElementById('chart');
+        const myChart = echarts.init(chartDom);
+
+        const load = (data) => {
+            const option = {
+                tooltip: {
+                        formatter: (params) => {
+                            const path = params.treePathInfo;
+                            const value = params.value;
+
+                            path.shift();
+
+                            return `${path.map(node => node.name).join(" > ")} (${value})`;
+                        }
+                    },
+                    aria: {
+                        show: true
+                    },
+                series: {
+                    type: 'sunburst',
+                    data: data,
+                    radius: [0, '95%'],
+                    sort: undefined,
+                    emphasis: {
+                        focus: 'descendant'
+                    },
+                    label: {
+                        formatter: (node) => {
+                            return node.name;
+                        }
+                    },
+                    levels: [
+                        {},
+                        {
+                            r0: '10%',
+                            r: '35%',
+                            itemStyle: {
+                                borderWidth: 2
+                            },
+                            label: {
+                                align: 'right',
+                                padding: 5,
+                            }
+                        },
+                        {
+                            r0: '35%',
+                            r: '60%',
+                            label: {
+                                align: 'right',
+                                padding: 3,
+                                overflow: 'break',
+                            }
+                        },
+                        {
+                            r0: '60%',
+                            r: '100%',
+                            label: {
+                                align: 'left',
+                                padding: 3,
+                            }
+                        }
+                    ]
+                }
+            };
+
+            myChart.setOption(option);
+        };
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const data = urlParams.get('data');
+
+        if (data) {
+            load(JSON.parse(data));
+        } else {
+            fetch('data-echarts.json').then(res => res.json()).then(load);
+        }
+
+    </script>
+</body>
+
+</html>
