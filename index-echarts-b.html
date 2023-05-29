@@ -8,6 +8,7 @@
             margin: 0
         }
         #chart {
+            min-height: 850;
             width: 100%;
             height: 100%;
         }
@@ -21,8 +22,7 @@
         const chartDom = document.getElementById('chart');
         const myChart = echarts.init(chartDom);
 
-        const load = (data) => {
-            const option = {
+        const option = {
                 tooltip: {
                         formatter: (params) => {
                             const path = params.treePathInfo;
@@ -38,7 +38,6 @@
                     },
                 series: {
                     type: 'sunburst',
-                    data: data,
                     radius: [0, '95%'],
                     sort: undefined,
                     emphasis: {
@@ -59,7 +58,7 @@
                             },
                             label: {
                                 align: 'right',
-                                padding: 5,
+                                padding: 5
                             }
                         },
                         {
@@ -67,8 +66,7 @@
                             r: '60%',
                             label: {
                                 align: 'right',
-                                padding: 3,
-                                overflow: 'break',
+                                padding: 3
                             }
                         },
                         {
@@ -76,13 +74,16 @@
                             r: '100%',
                             label: {
                                 align: 'left',
-                                padding: 3,
+                                padding: 3
                             }
                         }
                     ]
                 }
             };
 
+        const load = (data) => {
+ 
+            option.series.data = data;
             myChart.setOption(option);
         };
 
@@ -95,6 +96,16 @@
         } else {
             fetch('data-echarts.json').then(res => res.json()).then(load);
         }
+
+        myChart.on('click', 'series', function (params) {
+            console.log(params);
+
+            if(params.treePathInfo.length === 1) {
+                myChart.setOption(option)
+            }
+            
+        });
+
 
     </script>
 </body>
